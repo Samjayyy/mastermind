@@ -1,0 +1,28 @@
+.peg {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid black;
+}
+.grey {
+  background-color: grey;
+}
+.red {
+  background-color: red;
+}
+.blue {
+  background-color: blue;
+}
+.green,
+.correct {
+  background-color: green;
+}
+.white,
+.wrong {
+  background-color: white;
+}
+.yellow,
+.colored {
+  background-color: yellow;
+}
