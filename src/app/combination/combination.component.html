@@ -1,0 +1,5 @@
+<span
+  *ngFor="let peg of combination.pegs; let i = index"
+  [class]="'peg ' + combination.color(i)"
+  (click)="this.clickPeg(i)"
+></span>

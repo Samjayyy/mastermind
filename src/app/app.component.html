@@ -1,35 +1,35 @@
 <div>
-  <button type="button">New Game</button>
+  <input type="number" min="1" max="20" [(ngModel)]="this.pegCount" />
+  <button type="button" (click)="this.newGame()">New Game</button>
 </div>
-<div>
+<div *ngIf="this.current">
   <table class="guesses">
-    <tr>
+    <tr *ngFor="let result of this.results; let i = index">
       <td class="guess">
-        <span class="peg blue"></span>
-        <span class="peg yellow"></span>
-        <span class="peg grey"></span>
-        <span class="peg blue"></span>
+        <app-combination [combination]="result.guess"></app-combination>
       </td>
       <td class="result">
-        <span class="peg correct"></span>
-        <span class="peg colored"></span>
-        <span class="peg wrong"></span>
-        <span class="peg wrong"></span>
+        <span
+          *ngFor="let peg of result.guess.pegs; let j = index"
+          [class]="'peg ' + result.getClassForIndex(j)"
+        ></span>
       </td>
     </tr>
   </table>
 
   <div class="current">
     <hr />
-    <span class="peg blue"></span>
-    <span class="peg yellow"></span>
-    <span class="peg grey"></span>
-    <span class="peg blue"></span>
+    <app-combination
+      [combination]="this.current"
+      (pegClicked)="this.tapPeg($event)"
+    ></app-combination>
     <div>
-      <button type="button">Guess</button>
+      <button type="button" [disabled]="this.isSolved" (click)="this.guess()">
+        Guess
+      </button>
     </div>
   </div>
-  <h3>
-    YOU DID IT! It took you 3 guesses.
+  <h3 *ngIf="this.isSolved">
+    YOU DID IT! It took you {{ this.results.length }} guesses.
   </h3>
 </div>
