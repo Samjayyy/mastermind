@@ -104,6 +104,7 @@ export class AppComponent {
 
   public guess(): void {
     this.results.push(new Result(this.current).forSolution(this.solution));
+    setTimeout(() => document.getElementById("guess-btn").scrollIntoView(), 10);
   }
 
   public tapPeg(peg: number): void {
