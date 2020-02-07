@@ -2,4 +2,5 @@
   *ngFor="let peg of combination.pegs; let i = index"
   [class]="'peg ' + combination.color(i)"
   (click)="this.clickPeg(i)"
+  [ngStyle]="{ 'height.px': this.size, 'width.px': this.size }"
 ></span>

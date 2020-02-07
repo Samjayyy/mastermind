@@ -18,34 +18,24 @@
         </button>
       </span>
     </div>
-    <!-- /input-group -->
   </div>
   <div *ngIf="this.current">
-    <div class="guesses">
-      <div class="row" *ngFor="let result of this.results; let i = index">
-        <div class="guess col">
-          <app-combination [combination]="result.guess"></app-combination>
-        </div>
-        <div class="result col">
-          <span
-            *ngFor="let peg of result.guess.pegs; let j = index"
-            [class]="'peg ' + result.getClassForIndex(j)"
-          ></span>
-        </div>
-      </div>
-    </div>
-
-    <div class="current" id="current-guess">
-      <hr class="hr" />
+    <div class="current row" id="current-guess">
+      <div class="col-1"><i class="fa fa-hashtag fa-2x"></i></div>
       <app-combination
+        class="col-5"
         [combination]="this.current"
         (pegClicked)="this.tapPeg($event)"
       ></app-combination>
-      <div>
+      <div class="col-1"></div>
+      <div class="col-5">
+        <h3 *ngIf="this.isSolved">
+          YOU DID IT! It took you {{ this.results.length }} guesses.
+        </h3>
         <button
-          class="btn btn-primary btn-lg"
+          *ngIf="!this.isSolved"
+          class="btn btn-primary btn-lg btn-block"
           type="button"
-          [disabled]="this.isSolved"
           (click)="this.guess()"
           id="guess-btn"
         >
@@ -53,8 +43,21 @@
         </button>
       </div>
     </div>
-    <h3 *ngIf="this.isSolved">
-      YOU DID IT! It took you {{ this.results.length }} guesses.
-    </h3>
+    <div class="guesses">
+      <div class="row" *ngFor="let result of this.results; let i = index">
+        <div class="guessnr col-1 center-text">
+          {{ this.results.length - i }}
+        </div>
+        <app-combination
+          class="guess col-5"
+          [combination]="result.guess"
+        ></app-combination>
+        <div class="col-1"><i class="fa fa-list-alt"></i></div>
+        <app-combination
+          class="result col-5"
+          [combination]="result.resultPegs"
+        ></app-combination>
+      </div>
+    </div>
   </div>
 </div>

@@ -6,6 +6,10 @@ export class Result {
     this.correctPosition = 0;
     this.correctColor = 0;
   }
+  public guess: Combination;
+  public correctPosition: number;
+  public correctColor: number;
+  public resultPegs: Combination;
 
   public forSolution(solution: Combination): Result {
     if (this.guess.size !== solution.size) {
@@ -26,25 +30,25 @@ export class Result {
         this.correctColor++;
       }
     }
+    this.resultPegs = this.generateResultPegs();
     return this;
   }
 
-  public guess: Combination;
-  public correctPosition: number;
-  public correctColor: number;
+  private generateResultPegs(): Combination {
+    const comb = new Combination(
+      ArrayUtil.generateArray(this.guess.size, wrong_peg)
+    );
+    for (let i = 0; i < this.correctPosition; i++) {
+      comb.pegs[i] = correct_peg;
+    }
+    for (let i = 0; i < this.correctColor; i++) {
+      comb.pegs[i + this.correctPosition] = colored_peg;
+    }
+    return comb;
+  }
 
   get isSolved(): boolean {
     return this.guess.size === this.correctPosition;
-  }
-
-  getClassForIndex(index: number): string {
-    if (index < this.correctPosition) {
-      return "correct";
-    }
-    if (index < this.correctPosition + this.correctColor) {
-      return "colored";
-    }
-    return "wrong";
   }
 }
 
@@ -78,6 +82,9 @@ export class ArrayUtil {
   }
 }
 export const colors = ["grey", "red", "blue", "green", "white", "yellow"];
+export const correct_peg = 3;
+export const colored_peg = 5;
+export const wrong_peg = 4;
 
 @Component({
   selector: "app-root",
@@ -103,8 +110,8 @@ export class AppComponent {
   }
 
   public guess(): void {
-    this.results.push(new Result(this.current).forSolution(this.solution));
-    setTimeout(() => document.getElementById("guess-btn").scrollIntoView(), 10);
+    // adding the new result to the beginning of the array
+    this.results.unshift(new Result(this.current).forSolution(this.solution));
   }
 
   public tapPeg(peg: number): void {
@@ -113,8 +120,6 @@ export class AppComponent {
   }
 
   public get isSolved(): boolean {
-    return (
-      this.results.length > 0 && this.results[this.results.length - 1].isSolved
-    );
+    return this.results.length > 0 && this.results[0].isSolved;
   }
 }
