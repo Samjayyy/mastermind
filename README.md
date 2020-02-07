@@ -1,27 +1,21 @@
 # Mastermind
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.23.
+A simple implementation of the [mastermind game](<https://en.wikipedia.org/wiki/Mastermind_(board_game)>)
 
-## Development server
+Live Demo: https://www.samwiser.eu/games/mastermind
+
+## Local development
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Angular
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.23.
 
-## Build
+## Background
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Created this project to demo how fast you can create a simple game in angular. I've also added the branches to see this process
+- [`cleanstart`](https://github.com/Samjayyy/mastermind/tree/cleanstart): The empty project to start from
+- [`attempt1`](https://github.com/Samjayyy/mastermind/tree/attempt1): A first basic implementation, where everything is put in one component
+- [`attempt2`](https://github.com/Samjayyy/mastermind/tree/attempt2): Cleaning up the first attempt to show how you can use components inside components, eventemitters, ..
+- [`master`](https://github.com/Samjayyy/mastermind/): A version that is ready to use. It shows that the last 10% takes up 50% of the time.
